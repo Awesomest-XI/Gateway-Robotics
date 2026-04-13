@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
@@ -22,16 +22,16 @@ import java.util.concurrent.TimeUnit;
 public class TankDriveAprilTagTeleOp extends LinearOpMode {
 
     // Drive motors
-    private DcMotor rightB;
-    private DcMotor rightF;
-    private DcMotor leftB;
-    private DcMotor leftF;
+    private DcMotorEx rightB;
+    private DcMotorEx rightF;
+    private DcMotorEx leftB;
+    private DcMotorEx leftF;
 
     // Extra configured hardware
     private Servo risshort;
     private Servo reaisshort;
-    private DcMotor rightshota;
-    private DcMotor leftshota;
+    private DcMotorEx rightshota;
+    private DcMotorEx leftshota;
 
     ElapsedTime timer = new ElapsedTime();
 
@@ -74,14 +74,14 @@ public class TankDriveAprilTagTeleOp extends LinearOpMode {
         initAprilTag();
 
         // Hardware map
-        rightF = hardwareMap.get(DcMotor.class, "rightF");
-        leftF = hardwareMap.get(DcMotor.class, "leftF");
-        rightB = hardwareMap.get(DcMotor.class, "rightB");
-        leftB = hardwareMap.get(DcMotor.class, "leftB");
+        rightF = hardwareMap.get(DcMotorEx.class, "rightF");
+        leftF = hardwareMap.get(DcMotorEx.class, "leftF");
+        rightB = hardwareMap.get(DcMotorEx.class, "rightB");
+        leftB = hardwareMap.get(DcMotorEx.class, "leftB");
 
         // Still mapped even though not used yet
-        rightshota = hardwareMap.get(DcMotor.class, "rightshota");
-        leftshota = hardwareMap.get(DcMotor.class, "leftshota");
+        rightshota = hardwareMap.get(DcMotorEx.class, "rightshota");
+        leftshota = hardwareMap.get(DcMotorEx.class, "leftshota");
         risshort = hardwareMap.get(Servo.class, "risshort");
         reaisshort = hardwareMap.get(Servo.class, "reaisshort");
 
