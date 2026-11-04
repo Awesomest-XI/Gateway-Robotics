@@ -1,0 +1,444 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="autoTimer_id">autoTimer</variable>
+  </variables>
+  <block type="procedures_defnoreturn" id="rev26_0001" deletable="false" x="40" y="40">
+    <field name="NAME">runOpMode</field>
+    <comment pinned="false" h="65" w="410">FTC BIOBUZZ 2026-27 REV Starter Bot Auto. Face the intake toward the starting wall. Test directions and launch power before competition.</comment>
+    <statement name="STACK">
+      <block type="comment" id="rev26_0002">
+        <field name="COMMENT">REV 2026-27 config: leftDrive, rightDrive, intakeMotor, flywheel, crServo, pollenServo.</field>
+        <next>
+          <block type="dcMotor_setProperty_Direction" id="rev26_0003">
+            <field name="IDENTIFIER">rightDriveAsDcMotor</field>
+            <field name="PROP">Direction</field>
+            <data>{"IDENTIFIER": "rightDrive"}</data>
+            <value name="VALUE">
+              <block type="dcMotor_typedEnum_direction" id="rev26_0004">
+                <field name="DIRECTION">REVERSE</field>
+              </block>
+            </value>
+            <next>
+              <block type="dcMotor_setProperty_RunMode" id="rev26_0005">
+                <field name="IDENTIFIER">flywheelAsDcMotor</field>
+                <field name="PROP">Mode</field>
+                <data>{"IDENTIFIER": "flywheel"}</data>
+                <value name="VALUE">
+                  <block type="dcMotor_typedEnum_runMode" id="rev26_0006">
+                    <field name="RUN_MODE">RUN_USING_ENCODER</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="rev26_0007">
+                    <field name="VAR" id="autoTimer_id">autoTimer</field>
+                    <value name="VALUE">
+                      <block type="elapsedTime2_create" id="rev26_0008"/>
+                    </value>
+                    <next>
+                      <block type="dcMotor_setDualProperty" id="rev26_0009">
+                        <field name="PROP">Power</field>
+                        <field name="IDENTIFIER1">leftDriveAsDcMotor</field>
+                        <field name="IDENTIFIER2">rightDriveAsDcMotor</field>
+                        <data>{"IDENTIFIER1":"leftDrive","IDENTIFIER2":"rightDrive"}</data>
+                        <value name="VALUE1">
+                          <block type="math_number" id="rev26_0010">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <value name="VALUE2">
+                          <block type="math_number" id="rev26_0011">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="dcMotor_setProperty_Number" id="rev26_0012">
+                            <field name="IDENTIFIER">intakeMotorAsDcMotor</field>
+                            <field name="PROP">Power</field>
+                            <data>{"IDENTIFIER":"intakeMotor"}</data>
+                            <value name="VALUE">
+                              <block type="math_number" id="rev26_0013">
+                                <field name="NUM">0</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="dcMotor_setProperty_Number" id="rev26_0014">
+                                <field name="IDENTIFIER">flywheelAsDcMotor</field>
+                                <field name="PROP">Power</field>
+                                <data>{"IDENTIFIER":"flywheel"}</data>
+                                <value name="VALUE">
+                                  <block type="math_number" id="rev26_0015">
+                                    <field name="NUM">0</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="crServo_setProperty_Number" id="rev26_0016">
+                                    <field name="IDENTIFIER">crServoAsCRServo</field>
+                                    <field name="PROP">Power</field>
+                                    <data>{"IDENTIFIER":"crServo"}</data>
+                                    <value name="VALUE">
+                                      <block type="math_number" id="rev26_0017">
+                                        <field name="NUM">0</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="telemetry_addTextData_All" id="rev26_0018">
+                                        <value name="KEY">
+                                          <block type="text" id="rev26_0019">
+                                            <field name="TEXT">Stage</field>
+                                          </block>
+                                        </value>
+                                        <value name="TEXT">
+                                          <block type="text" id="rev26_0020">
+                                            <field name="TEXT">Ready - face intake at wall</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="telemetry_update" id="rev26_0021">
+                                            <next>
+                                              <block type="linearOpMode_waitForStart" id="rev26_0022">
+                                                <next>
+                                                  <block type="controls_if" id="rev26_0023">
+                                                    <value name="IF0">
+                                                      <block type="linearOpMode_opModeIsActive" id="rev26_0024"/>
+                                                    </value>
+                                                    <statement name="DO0">
+                                                      <block type="servo_setProperty_Number" id="rev26_0025">
+                                                        <field name="IDENTIFIER">pollenServoAsServo</field>
+                                                        <field name="PROP">Position</field>
+                                                        <data>{"IDENTIFIER":"pollenServo"}</data>
+                                                        <value name="VALUE">
+                                                          <block type="math_number" id="rev26_0026">
+                                                            <field name="NUM">1</field>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="comment" id="rev26_0027">
+                                                            <field name="COMMENT">Move away from the wall: both drives at -0.25 for 0.7 seconds. TUNE on your field.</field>
+                                                            <next>
+                                                              <block type="elapsedTime2_reset" id="rev26_0028">
+                                                                <value name="ELAPSED_TIME">
+                                                                  <block type="variables_get" id="rev26_0029">
+                                                                    <field name="VAR" id="autoTimer_id">autoTimer</field>
+                                                                  </block>
+                                                                </value>
+                                                                <next>
+                                                                  <block type="dcMotor_setDualProperty" id="rev26_0030">
+                                                                    <field name="PROP">Power</field>
+                                                                    <field name="IDENTIFIER1">leftDriveAsDcMotor</field>
+                                                                    <field name="IDENTIFIER2">rightDriveAsDcMotor</field>
+                                                                    <data>{"IDENTIFIER1":"leftDrive","IDENTIFIER2":"rightDrive"}</data>
+                                                                    <value name="VALUE1">
+                                                                      <block type="math_number" id="rev26_0031">
+                                                                        <field name="NUM">-0.25</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="VALUE2">
+                                                                      <block type="math_number" id="rev26_0032">
+                                                                        <field name="NUM">-0.25</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <next>
+                                                                      <block type="controls_whileUntil" id="rev26_0033">
+                                                                        <field name="MODE">WHILE</field>
+                                                                        <value name="BOOL">
+                                                                          <block type="logic_operation" id="rev26_0034">
+                                                                            <field name="OP">AND</field>
+                                                                            <value name="A">
+                                                                              <block type="linearOpMode_opModeIsActive" id="rev26_0035"/>
+                                                                            </value>
+                                                                            <value name="B">
+                                                                              <block type="logic_compare" id="rev26_0036">
+                                                                                <field name="OP">LT</field>
+                                                                                <value name="A">
+                                                                                  <block type="elapsedTime2_getProperty_Number" id="rev26_0037">
+                                                                                    <field name="PROP">Seconds</field>
+                                                                                    <value name="ELAPSED_TIME">
+                                                                                      <block type="variables_get" id="rev26_0038">
+                                                                                        <field name="VAR" id="autoTimer_id">autoTimer</field>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <value name="B">
+                                                                                  <block type="math_number" id="rev26_0039">
+                                                                                    <field name="NUM">0.7</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                        <statement name="DO">
+                                                                          <block type="telemetry_update" id="rev26_0040"/>
+                                                                        </statement>
+                                                                        <next>
+                                                                          <block type="dcMotor_setDualProperty" id="rev26_0041">
+                                                                            <field name="PROP">Power</field>
+                                                                            <field name="IDENTIFIER1">leftDriveAsDcMotor</field>
+                                                                            <field name="IDENTIFIER2">rightDriveAsDcMotor</field>
+                                                                            <data>{"IDENTIFIER1":"leftDrive","IDENTIFIER2":"rightDrive"}</data>
+                                                                            <value name="VALUE1">
+                                                                              <block type="math_number" id="rev26_0042">
+                                                                                <field name="NUM">0</field>
+                                                                              </block>
+                                                                            </value>
+                                                                            <value name="VALUE2">
+                                                                              <block type="math_number" id="rev26_0043">
+                                                                                <field name="NUM">0</field>
+                                                                              </block>
+                                                                            </value>
+                                                                            <next>
+                                                                              <block type="comment" id="rev26_0044">
+                                                                                <field name="COMMENT">Start flywheel and spin up for 2.0 seconds. Power-based starter code, tune launch range.</field>
+                                                                                <next>
+                                                                                  <block type="dcMotor_setProperty_Number" id="rev26_0045">
+                                                                                    <field name="IDENTIFIER">flywheelAsDcMotor</field>
+                                                                                    <field name="PROP">Power</field>
+                                                                                    <data>{"IDENTIFIER":"flywheel"}</data>
+                                                                                    <value name="VALUE">
+                                                                                      <block type="math_number" id="rev26_0046">
+                                                                                        <field name="NUM">0.78</field>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                    <next>
+                                                                                      <block type="elapsedTime2_reset" id="rev26_0047">
+                                                                                        <value name="ELAPSED_TIME">
+                                                                                          <block type="variables_get" id="rev26_0048">
+                                                                                            <field name="VAR" id="autoTimer_id">autoTimer</field>
+                                                                                          </block>
+                                                                                        </value>
+                                                                                        <next>
+                                                                                          <block type="controls_whileUntil" id="rev26_0049">
+                                                                                            <field name="MODE">WHILE</field>
+                                                                                            <value name="BOOL">
+                                                                                              <block type="logic_operation" id="rev26_0050">
+                                                                                                <field name="OP">AND</field>
+                                                                                                <value name="A">
+                                                                                                  <block type="linearOpMode_opModeIsActive" id="rev26_0051"/>
+                                                                                                </value>
+                                                                                                <value name="B">
+                                                                                                  <block type="logic_compare" id="rev26_0052">
+                                                                                                    <field name="OP">LT</field>
+                                                                                                    <value name="A">
+                                                                                                      <block type="elapsedTime2_getProperty_Number" id="rev26_0053">
+                                                                                                        <field name="PROP">Seconds</field>
+                                                                                                        <value name="ELAPSED_TIME">
+                                                                                                          <block type="variables_get" id="rev26_0054">
+                                                                                                            <field name="VAR" id="autoTimer_id">autoTimer</field>
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                      </block>
+                                                                                                    </value>
+                                                                                                    <value name="B">
+                                                                                                      <block type="math_number" id="rev26_0055">
+                                                                                                        <field name="NUM">2.0</field>
+                                                                                                      </block>
+                                                                                                    </value>
+                                                                                                  </block>
+                                                                                                </value>
+                                                                                              </block>
+                                                                                            </value>
+                                                                                            <statement name="DO">
+                                                                                              <block type="telemetry_update" id="rev26_0056"/>
+                                                                                            </statement>
+                                                                                            <next>
+                                                                                              <block type="comment" id="rev26_0057">
+                                                                                                <field name="COMMENT">Feed preloaded Pollen for 8 seconds. Reverse intake/CR servo power if feeder turns wrong way.</field>
+                                                                                                <next>
+                                                                                                  <block type="dcMotor_setProperty_Number" id="rev26_0058">
+                                                                                                    <field name="IDENTIFIER">intakeMotorAsDcMotor</field>
+                                                                                                    <field name="PROP">Power</field>
+                                                                                                    <data>{"IDENTIFIER":"intakeMotor"}</data>
+                                                                                                    <value name="VALUE">
+                                                                                                      <block type="math_number" id="rev26_0059">
+                                                                                                        <field name="NUM">1</field>
+                                                                                                      </block>
+                                                                                                    </value>
+                                                                                                    <next>
+                                                                                                      <block type="crServo_setProperty_Number" id="rev26_0060">
+                                                                                                        <field name="IDENTIFIER">crServoAsCRServo</field>
+                                                                                                        <field name="PROP">Power</field>
+                                                                                                        <data>{"IDENTIFIER":"crServo"}</data>
+                                                                                                        <value name="VALUE">
+                                                                                                          <block type="math_number" id="rev26_0061">
+                                                                                                            <field name="NUM">1</field>
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                        <next>
+                                                                                                          <block type="elapsedTime2_reset" id="rev26_0062">
+                                                                                                            <value name="ELAPSED_TIME">
+                                                                                                              <block type="variables_get" id="rev26_0063">
+                                                                                                                <field name="VAR" id="autoTimer_id">autoTimer</field>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                            <next>
+                                                                                                              <block type="controls_whileUntil" id="rev26_0064">
+                                                                                                                <field name="MODE">WHILE</field>
+                                                                                                                <value name="BOOL">
+                                                                                                                  <block type="logic_operation" id="rev26_0065">
+                                                                                                                    <field name="OP">AND</field>
+                                                                                                                    <value name="A">
+                                                                                                                      <block type="linearOpMode_opModeIsActive" id="rev26_0066"/>
+                                                                                                                    </value>
+                                                                                                                    <value name="B">
+                                                                                                                      <block type="logic_compare" id="rev26_0067">
+                                                                                                                        <field name="OP">LT</field>
+                                                                                                                        <value name="A">
+                                                                                                                          <block type="elapsedTime2_getProperty_Number" id="rev26_0068">
+                                                                                                                            <field name="PROP">Seconds</field>
+                                                                                                                            <value name="ELAPSED_TIME">
+                                                                                                                              <block type="variables_get" id="rev26_0069">
+                                                                                                                                <field name="VAR" id="autoTimer_id">autoTimer</field>
+                                                                                                                              </block>
+                                                                                                                            </value>
+                                                                                                                          </block>
+                                                                                                                        </value>
+                                                                                                                        <value name="B">
+                                                                                                                          <block type="math_number" id="rev26_0070">
+                                                                                                                            <field name="NUM">8.0</field>
+                                                                                                                          </block>
+                                                                                                                        </value>
+                                                                                                                      </block>
+                                                                                                                    </value>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                                <statement name="DO">
+                                                                                                                  <block type="telemetry_update" id="rev26_0071"/>
+                                                                                                                </statement>
+                                                                                                                <next>
+                                                                                                                  <block type="comment" id="rev26_0072">
+                                                                                                                    <field name="COMMENT">Stop all active actuators at end of autonomous.</field>
+                                                                                                                    <next>
+                                                                                                                      <block type="crServo_setProperty_Number" id="rev26_0073">
+                                                                                                                        <field name="IDENTIFIER">crServoAsCRServo</field>
+                                                                                                                        <field name="PROP">Power</field>
+                                                                                                                        <data>{"IDENTIFIER":"crServo"}</data>
+                                                                                                                        <value name="VALUE">
+                                                                                                                          <block type="math_number" id="rev26_0074">
+                                                                                                                            <field name="NUM">0</field>
+                                                                                                                          </block>
+                                                                                                                        </value>
+                                                                                                                        <next>
+                                                                                                                          <block type="dcMotor_setProperty_Number" id="rev26_0075">
+                                                                                                                            <field name="IDENTIFIER">intakeMotorAsDcMotor</field>
+                                                                                                                            <field name="PROP">Power</field>
+                                                                                                                            <data>{"IDENTIFIER":"intakeMotor"}</data>
+                                                                                                                            <value name="VALUE">
+                                                                                                                              <block type="math_number" id="rev26_0076">
+                                                                                                                                <field name="NUM">0</field>
+                                                                                                                              </block>
+                                                                                                                            </value>
+                                                                                                                            <next>
+                                                                                                                              <block type="dcMotor_setProperty_Number" id="rev26_0077">
+                                                                                                                                <field name="IDENTIFIER">flywheelAsDcMotor</field>
+                                                                                                                                <field name="PROP">Power</field>
+                                                                                                                                <data>{"IDENTIFIER":"flywheel"}</data>
+                                                                                                                                <value name="VALUE">
+                                                                                                                                  <block type="math_number" id="rev26_0078">
+                                                                                                                                    <field name="NUM">0</field>
+                                                                                                                                  </block>
+                                                                                                                                </value>
+                                                                                                                                <next>
+                                                                                                                                  <block type="dcMotor_setDualProperty" id="rev26_0079">
+                                                                                                                                    <field name="PROP">Power</field>
+                                                                                                                                    <field name="IDENTIFIER1">leftDriveAsDcMotor</field>
+                                                                                                                                    <field name="IDENTIFIER2">rightDriveAsDcMotor</field>
+                                                                                                                                    <data>{"IDENTIFIER1":"leftDrive","IDENTIFIER2":"rightDrive"}</data>
+                                                                                                                                    <value name="VALUE1">
+                                                                                                                                      <block type="math_number" id="rev26_0080">
+                                                                                                                                        <field name="NUM">0</field>
+                                                                                                                                      </block>
+                                                                                                                                    </value>
+                                                                                                                                    <value name="VALUE2">
+                                                                                                                                      <block type="math_number" id="rev26_0081">
+                                                                                                                                        <field name="NUM">0</field>
+                                                                                                                                      </block>
+                                                                                                                                    </value>
+                                                                                                                                    <next>
+                                                                                                                                      <block type="telemetry_addTextData_All" id="rev26_0082">
+                                                                                                                                        <value name="KEY">
+                                                                                                                                          <block type="text" id="rev26_0083">
+                                                                                                                                            <field name="TEXT">Stage</field>
+                                                                                                                                          </block>
+                                                                                                                                        </value>
+                                                                                                                                        <value name="TEXT">
+                                                                                                                                          <block type="text" id="rev26_0084">
+                                                                                                                                            <field name="TEXT">Done</field>
+                                                                                                                                          </block>
+                                                                                                                                        </value>
+                                                                                                                                        <next>
+                                                                                                                                          <block type="telemetry_update" id="rev26_0085"/>
+                                                                                                                                        </next>
+                                                                                                                                      </block>
+                                                                                                                                    </next>
+                                                                                                                                  </block>
+                                                                                                                                </next>
+                                                                                                                              </block>
+                                                                                                                            </next>
+                                                                                                                          </block>
+                                                                                                                        </next>
+                                                                                                                      </block>
+                                                                                                                    </next>
+                                                                                                                  </block>
+                                                                                                                </next>
+                                                                                                              </block>
+                                                                                                            </next>
+                                                                                                          </block>
+                                                                                                        </next>
+                                                                                                      </block>
+                                                                                                    </next>
+                                                                                                  </block>
+                                                                                                </next>
+                                                                                              </block>
+                                                                                            </next>
+                                                                                          </block>
+                                                                                        </next>
+                                                                                      </block>
+                                                                                    </next>
+                                                                                  </block>
+                                                                                </next>
+                                                                              </block>
+                                                                            </next>
+                                                                          </block>
+                                                                        </next>
+                                                                      </block>
+                                                                    </next>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </statement>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<Extra>
+<OpModeMeta flavor="AUTONOMOUS" group="REV_2026" autoTransition="" />
+<Enabled value="true" />
+</Extra>
