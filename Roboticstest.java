@@ -25,7 +25,7 @@ public class Roboticstest2 extends LinearOpMode {
    *x=a
    *circle=b
    */
-  private void s hooter_motor2() {
+  private void shooter_motor2() {
     if (gamepad2.triangle) {
       ((DcMotorEx) shooter_motor).setVelocity(targetVelocity);
     } else if (gamepad2.square) {
@@ -66,6 +66,7 @@ public class Roboticstest2 extends LinearOpMode {
     // applied power makes it move the robot in the forward direction.
     back_right_motor.setDirection(DcMotor.Direction.REVERSE);
     double poker = 0.5;
+    boolean toggle = false;
     targetVelocity = 1160;
     waitForStart();
     if (opModeIsActive()) {
@@ -82,7 +83,7 @@ public class Roboticstest2 extends LinearOpMode {
         telemetry.addData("Shooter Velocity", ((DcMotorEx) shooter_motor).getVelocity());
         telemetry.addData("Target Velocity", targetVelocity);
         telemetry.update();
-        if (gamepad1.left_trigger == 1) {
+        if (gamepad1.left_trigger > 0.3) {
           intake_motors.setPower(1);
         } else {
           intake_motors.setPower(0);
@@ -92,19 +93,13 @@ public class Roboticstest2 extends LinearOpMode {
         } else {
           intakeservo.setPower(0);
         }
-      if (gamepad2.b & poker == 1) {
-       poker = 0.5;
+      if (gamepad2.b & !toggle) {
+      poker = (poker = 0.5) ? 1.0 : 0.5;
       }
-        else if (gamepad2.b & poker == 0.5) {
-       poker = 1;
-      }
+       
           pokerservo.setPosition(poker);
        
-        if (gamepad1.right_trigger == 1) {
-          shooter_motor.setPower(1);
-        } else {
-          shooter_motor.setPower(0);
-        }
+        
       }
     }
   }
