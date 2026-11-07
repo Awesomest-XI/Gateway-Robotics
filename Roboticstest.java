@@ -94,7 +94,7 @@ public class Roboticstest2 extends LinearOpMode {
           intakeservo.setPower(0);
         }
       if (gamepad2.b & !toggle) {
-      poker = (poker = 0.5) ? 1.0 : 0.5;
+      poker = (poker == 0.5) ? 1.0 : 0.5;
       }
        toggle = gamepad2.b;
           pokerservo.setPosition(poker);
