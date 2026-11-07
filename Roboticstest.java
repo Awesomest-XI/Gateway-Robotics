@@ -32,12 +32,12 @@ public class Roboticstest2 extends LinearOpMode {
       shooter_motor.setPower(-0.55);
     } else if (gamepad2.left_bumper) {
       ((DcMotorEx) shooter_motor).setVelocity(targetVelocity);
-      if (((DcMotorEx) shooter_motor).getVelocity() >= targetVelocity - 20 && ((DcMotorEx) shooter_motor).getVelocity() <= targetVelocity + 20) {
+      if (((DcMotorEx) shooter_motor).getVelocity() >= targetVelocity - 40 && ((DcMotorEx) shooter_motor).getVelocity() <= targetVelocity + 40) {
         intakeservo.setPower(1);
       }
-    } else if (gamepad1.dpad_up) {
+    } else if (gamepad2.dpad_up) {
       intakeservo.setPower(1);
-    } else if (gamepad1.dpad_down) {
+    } else if (gamepad2.dpad_down) {
       intakeservo.setPower(-1);
     } else {
       shooter_motor.setPower(0);
